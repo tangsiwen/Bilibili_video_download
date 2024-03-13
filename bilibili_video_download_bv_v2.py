@@ -179,16 +179,28 @@ def combine_video(video_list, rootTitle ,title):
 if __name__ == '__main__':
     # 用户输入av号或者视频链接地址
     print('*' * 30 + 'B站视频下载小助手' + '*' * 30)
-    start = input('请输入您要下载的B站bv号或者视频链接地址:')
-    if len(start) == 10:
-        # 如果输入的是bv号
-        # 获取cid的api, 传入bvid即可
-        bvid = start
-        start_url = 'https://api.bilibili.com/x/web-interface/view?bvid=' + bvid
-    else:
-        # 如果输入的是url (eg: https://www.bilibili.com/video/av46958874/)
-        bvid = re.search(r'/BV(\d+)/*', start).group(1)
-        start_url = 'https://api.bilibili.com/x/web-interface/view?bvid=' + bvid
+    #start = input('请输入您要下载的B站bv号（长度为10）或者视频链接地址:')
+    wi = True
+    while wi :
+        start = input('请输入您要下载的B站bv号（长度为10）或者视频链接地址:')
+        if len(start) == 10:
+            # 如果输入的是bv号
+            # 获取cid的api, 传入bvid即可
+            bvid = start
+            wi = False
+        else:
+            # 如果输入的是url (eg: https://www.bilibili.com/video/av46958874/)
+            rs = re.search(r'BV(.*?)/', start)
+            if rs:
+                bvid = rs.group(1)
+                if bvid: 
+                    wi = False
+                else:
+                    print('输入的内容有误')
+            else:
+                print('输入的内容有误')
+    print('[接收到BV号]:' + bvid)
+    start_url = 'https://api.bilibili.com/x/web-interface/view?bvid=' + bvid
     # qn参数就是视频清晰度
     # 可选值：
     # 116: 高清1080P60 (需要带入大会员的cookie中的SESSDATA才行,普通用户的SESSDATA最多只能下载1080p的视频)
