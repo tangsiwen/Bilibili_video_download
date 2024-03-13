@@ -30,6 +30,9 @@ Bilibili(b站)视频下载 ![enter image description here](Pic/logo.png)
 
 - **版本五: bilibili_video_download_bangumi.py**
   > **在版本一,三基础上增加下载B站番剧视频(eg: https://www.bilibili.com/bangumi/play/ep269835)<br>**
+
+- **版本六: bilibili_video_download_bv_v2.py**
+  > **在版本二基础上修改为下载BV号视频的功能<br>**
 ## :dolphin:运行环境
 Version: Python3
 ## :dolphin:安装依赖库
